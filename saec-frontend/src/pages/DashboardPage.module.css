@@ -1,0 +1,108 @@
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-gray-50);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 64px;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+  box-shadow: var(--shadow-sm);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.logoText {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--color-gray-800);
+}
+
+.userRole {
+  font-size: 0.8125rem;
+  color: var(--color-gray-500);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.logoutBtn {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1.5px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  font-weight: 500;
+  transition: all var(--transition);
+}
+
+.logoutBtn:hover {
+  border-color: var(--color-error);
+  color: var(--color-error);
+  background: var(--color-error-light);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.welcomeCard {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 3rem;
+  box-shadow: var(--shadow-md);
+  max-width: 520px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.welcomeCard h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
+}
+
+.welcomeCard p {
+  color: var(--color-gray-600);
+  line-height: 1.6;
+}
+
+.note {
+  font-size: 0.875rem;
+  color: var(--color-gray-400);
+  border-top: 1px solid var(--color-gray-100);
+  padding-top: 0.75rem;
+  margin-top: 0.25rem;
+}

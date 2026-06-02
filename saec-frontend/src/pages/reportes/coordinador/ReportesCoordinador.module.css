@@ -1,0 +1,168 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* KPIs */
+.kpiRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.kpi {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.kpi_blue   { border-left: 4px solid var(--color-primary); }
+.kpi_yellow { border-left: 4px solid #c27803; }
+.kpi_green  { border-left: 4px solid #057a55; }
+.kpi_red    { border-left: 4px solid #e02424; }
+
+.kpiIcon  { opacity: .7; }
+.kpiValue { font-size: 1.8rem; font-weight: 700; line-height: 1; }
+.kpiLabel { font-size: .8rem; color: var(--color-gray-500); margin-top: .2rem; }
+
+/* Card */
+.card {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.cardTitle {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--color-gray-700);
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* Tasa de aprobación */
+.rateRow {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+.rateValue {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #057a55;
+  flex-shrink: 0;
+}
+.rateBar {
+  flex: 1;
+  height: 12px;
+  background: var(--color-gray-100);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.rateBarFill {
+  height: 100%;
+  background: #057a55;
+  border-radius: 99px;
+  transition: width .5s ease;
+}
+
+/* Funnel bar */
+.funnelBar {
+  display: flex;
+  height: 24px;
+  border-radius: 6px;
+  overflow: hidden;
+  gap: 2px;
+  margin-bottom: .75rem;
+}
+.funnelSegment { transition: flex .4s ease; }
+.funnelGreen  { background: #057a55; }
+.funnelYellow { background: #c27803; }
+.funnelRed    { background: #e02424; }
+
+.funnelLegend {
+  display: flex;
+  gap: 1.25rem;
+  font-size: .8rem;
+  font-weight: 600;
+}
+.legendGreen  { color: #057a55; }
+.legendYellow { color: #c27803; }
+.legendRed    { color: #e02424; }
+
+/* Table */
+.tableWrapper { overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.table th {
+  text-align: left;
+  padding: .6rem .75rem;
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--color-gray-500);
+  border-bottom: 1px solid var(--color-gray-100);
+  white-space: nowrap;
+}
+.table td {
+  padding: .65rem .75rem;
+  border-bottom: 1px solid var(--color-gray-50);
+  color: var(--color-gray-700);
+  vertical-align: middle;
+}
+.table tr:last-child td { border-bottom: none; }
+
+.codigo { font-weight: 600; color: var(--color-primary); }
+.titulo { max-width: 18rem; }
+.centroNombre { font-weight: 600; color: var(--color-gray-700); }
+.numCell { text-align: center; }
+.numGreen  { color: #057a55; font-weight: 600; }
+.numYellow { color: #c27803; font-weight: 600; }
+.numRed    { color: #e02424; font-weight: 600; }
+
+/* Progress bar in table */
+.progCell {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.progTrack {
+  flex: 1;
+  height: 8px;
+  background: var(--color-gray-100);
+  border-radius: 99px;
+  overflow: hidden;
+  min-width: 60px;
+}
+.progFill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 99px;
+  transition: width .4s ease;
+}
+.progLabel {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--color-gray-600);
+  white-space: nowrap;
+  width: 2.5rem;
+  text-align: right;
+}
+
+/* States */
+.loading { padding: 3rem; text-align: center; color: var(--color-gray-400); }
+.error   { padding: 2rem; text-align: center; color: #e02424; }
+.empty   { color: var(--color-gray-400); font-size: .88rem; padding: .5rem 0; }
+
+@media (max-width: 1024px) {
+  .kpiRow { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .kpiRow { grid-template-columns: 1fr; }
+}

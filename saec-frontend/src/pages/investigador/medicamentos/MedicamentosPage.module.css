@@ -1,0 +1,99 @@
+.page { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.searchWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+}
+
+.searchWrap svg {
+  position: absolute;
+  left: 0.875rem;
+  color: var(--color-gray-400);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.65rem 1rem 0.65rem 2.5rem;
+  border: 1.5px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-family: var(--font-family);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.searchInput:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26,86,219,.1);
+}
+
+/* Tabla */
+.tableCard {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-100);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.tableHeader {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+.tableTitle { font-size: 0.9375rem; font-weight: 600; color: var(--color-gray-700); }
+
+.tableWrapper { overflow-x: auto; }
+
+.table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+
+.table thead tr { background: var(--color-gray-50); }
+
+.table th {
+  padding: 0.75rem 1.25rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-gray-500);
+}
+
+.table td {
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid var(--color-gray-50);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td { border-bottom: none; }
+.table tbody tr:hover { background: var(--color-gray-50); }
+
+.num    { color: var(--color-gray-400); font-size: 0.8125rem; width: 48px; }
+.nombre { font-weight: 500; color: var(--color-gray-900); width: 220px; }
+
+.descripcion {
+  color: var(--color-gray-600);
+  font-size: 0.875rem;
+  max-width: 480px;
+}
+
+.sinDesc {
+  color: var(--color-gray-400);
+  font-style: italic;
+  font-size: 0.8125rem;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 3.5rem;
+  color: var(--color-gray-400);
+  font-size: 0.9375rem;
+}
+
+.paginationWrap { padding: 0 1.25rem; }

@@ -1,0 +1,49 @@
+﻿server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/SGEC2
+    username: postgres
+    password: 120624
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: update # 'update' crea tablas faltantes sin borrar datos; cambiar a 'validate' en producciÃ³n
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    open-in-view: false
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: America/Santiago
+
+saec:
+  jwt:
+    secret: ${JWT_SECRET:c2FlY19zZWNyZXRfa2V5X2Zvcl9qd3RfYXV0aGVudGljYXRpb25fc2FmZV9rZXlfMjAyNg==}
+    expiration-ms: 86400000 # 24 horas
+
+logging:
+  level:
+    root: WARN # silencia el ruido de librerÃ­as externas
+    com.saec: DEBUG # muestra TODO lo de tu cÃ³digo (DEBUG, INFO, WARN, ERROR)
+    org.springframework.security: WARN
+    org.springframework.web.servlet.DispatcherServlet: DEBUG # muestra quÃ© endpoint recibe cada request
+  pattern:
+    console: "%d{HH:mm:ss} %-5level %logger{30} â€” %msg%n"

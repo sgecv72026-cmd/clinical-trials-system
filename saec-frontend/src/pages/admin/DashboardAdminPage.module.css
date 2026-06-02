@@ -1,0 +1,137 @@
+.page { display: flex; flex-direction: column; gap: 1.75rem; }
+
+.welcomeBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.welcomeTitle {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  letter-spacing: -0.02em;
+}
+
+.welcomeSub { font-size: 0.9375rem; color: var(--color-gray-500); margin-top: 0.25rem; }
+
+.systemStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #15803d;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 0.375rem 0.875rem;
+  border-radius: 999px;
+}
+
+.statusDot {
+  width: 8px; height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Stats grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* Section */
+.section { display: flex; flex-direction: column; gap: 1rem; }
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-gray-800);
+}
+
+/* Quick access */
+.quickAccess {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.quickCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.125rem;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-gray-700);
+  font-family: var(--font-family);
+  transition: all var(--transition);
+  text-align: left;
+}
+
+.quickCard svg:last-child { margin-left: auto; color: var(--color-gray-400); }
+
+.quickCard:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.quickIcon {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.blue   .quickIcon { background: #eff6ff; color: #1d4ed8; }
+.green  .quickIcon { background: #f0fdf4; color: #15803d; }
+.purple .quickIcon { background: #faf5ff; color: #7e22ce; }
+.amber  .quickIcon { background: #fffbeb; color: #b45309; }
+.cyan   .quickIcon { background: #ecfeff; color: #0e7490; }
+
+/* Rol distribution */
+.rolDistCard {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.rolDistNote { font-size: 0.875rem; color: var(--color-gray-500); margin-bottom: 1.25rem; }
+.inlineLink { background: none; border: none; color: var(--color-primary); cursor: pointer; font-size: inherit; padding: 0; text-decoration: underline; }
+
+.rolBars { display: flex; flex-direction: column; gap: 0.875rem; }
+
+.rolRow { display: flex; align-items: center; gap: 1rem; }
+
+.barTrack {
+  flex: 1;
+  height: 8px;
+  background: var(--color-gray-100);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.barFill { height: 100%; border-radius: 999px; transition: width 600ms ease; }
+.blue   .barFill, .barFill.blue   { background: #1d4ed8; }
+.purple .barFill, .barFill.purple { background: #7e22ce; }
+.cyan   .barFill, .barFill.cyan   { background: #0e7490; }
+.amber  .barFill, .barFill.amber  { background: #b45309; }
+.green  .barFill, .barFill.green  { background: #15803d; }

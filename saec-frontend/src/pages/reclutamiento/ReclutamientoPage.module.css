@@ -1,0 +1,19 @@
+.noAcceso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  gap: 1rem;
+  color: var(--color-gray-500);
+  text-align: center;
+}
+
+.noAccesoIcon {
+  font-size: 3rem;
+}
+
+.noAccesoMsg {
+  font-size: 0.925rem;
+  margin: 0;
+}

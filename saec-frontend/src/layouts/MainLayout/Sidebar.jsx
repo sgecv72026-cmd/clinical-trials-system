@@ -1,0 +1,252 @@
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import styles from './Sidebar.module.css';
+
+export function Sidebar({ collapsed, onToggle }) {
+  const { user } = useAuth();
+  const rol = user?.rol ?? '';
+  const [protExpanded, setProtExpanded] = useState(true);
+
+  const esMedico       = rol.includes('Médico') || rol.includes('Medico');
+  const esCoordinador  = rol === 'Coordinador de Reclutamiento';
+  const esInvestigador = rol === 'Investigador Principal';
+  const esComite       = rol.includes('Ética') || rol.includes('Etica') || rol === 'Comité de Ética';
+
+  /* ruta de perfil según rol (todas dentro de MainLayout) */
+  const perfilPath = esComite ? '/reportes/perfil' : '/reclutamiento/perfil';
+
+  return (
+    <aside className={`${styles.sidebar} ${collapsed ? styles.collapsed : ''}`}>
+
+      {/* ── Logo ─────────────────────────────────────────────────── */}
+      <div className={styles.brand}>
+        <button
+          className={`${styles.brandLogo} ${collapsed ? styles.brandLogoClickable : ''}`}
+          onClick={collapsed ? onToggle : undefined}
+          type="button"
+          aria-label={collapsed ? 'Expandir sidebar' : undefined}
+        >
+          <svg viewBox="0 0 40 40" fill="none" width="32" height="32">
+            <circle cx="20" cy="20" r="20" fill="#1a56db" />
+            <path d="M13 20C13 16 16 13 20 13C24 13 27 16 27 20C27 24 24 27 20 27C16 27 13 24 13 20Z"
+              fill="none" stroke="white" strokeWidth="2" />
+            <path d="M16 20H24M20 16V24" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="20" cy="20" r="2" fill="white" />
+          </svg>
+        </button>
+        {!collapsed && <span className={styles.brandName}>SGEC</span>}
+        {!collapsed && (
+          <button className={styles.collapseBtn} onClick={onToggle} type="button" aria-label="Minimizar sidebar">
+            <ChevronIcon collapsed={collapsed} />
+          </button>
+        )}
+      </div>
+
+      <nav className={styles.nav}>
+
+        {/* ── MI CUENTA ─────────────────────────────────────────── */}
+        <span className={styles.navSection}>{!collapsed && 'MI CUENTA'}</span>
+        <NavLink
+          to={perfilPath}
+          end
+          className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}
+          title={collapsed ? 'Mi Perfil' : undefined}
+        >
+          <span className={styles.navIcon}><UserCircleIcon /></span>
+          {!collapsed && <span className={styles.navLabel}>Mi Perfil</span>}
+        </NavLink>
+
+        {/* ── INVESTIGADOR (solo Investigador Principal) ─────────── */}
+        {esInvestigador && (
+          <>
+            <span className={styles.navSection}>{!collapsed && 'INVESTIGADOR'}</span>
+
+            {/* Protocolos — grupo expandible */}
+            <button
+              className={`${styles.navItem} ${styles.navGroupBtn}`}
+              onClick={() => !collapsed && setProtExpanded(v => !v)}
+              title={collapsed ? 'Protocolos' : undefined}
+              type="button"
+            >
+              <span className={styles.navIcon}><FlaskIcon /></span>
+              {!collapsed && (
+                <>
+                  <span className={styles.navLabel}>Protocolos</span>
+                  <span className={styles.groupChevron}>
+                    <ChevronGroupIcon expanded={protExpanded} />
+                  </span>
+                </>
+              )}
+            </button>
+
+            {(protExpanded || collapsed) && (
+              <div className={styles.subItemsGroup}>
+                <NavLink
+                  to="/investigador/protocolos"
+                  className={({ isActive }) =>
+                    `${styles.navItem} ${styles.navSubItem} ${isActive ? styles.active : ''}`
+                  }
+                  title={collapsed ? 'Lista de Protocolos' : undefined}
+                >
+                  <span className={styles.navIcon}><ListIcon /></span>
+                  {!collapsed && <span className={styles.navLabel}>Lista de Protocolos</span>}
+                </NavLink>
+
+                <NavLink
+                  to="/investigador/medicamentos"
+                  end
+                  className={({ isActive }) =>
+                    `${styles.navItem} ${styles.navSubItem} ${isActive ? styles.active : ''}`
+                  }
+                  title={collapsed ? 'Medicamentos' : undefined}
+                >
+                  <span className={styles.navIcon}><PillIcon /></span>
+                  {!collapsed && <span className={styles.navLabel}>Medicamentos</span>}
+                </NavLink>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* ── RECLUTAMIENTO (Médico, Coordinador, Investigador) ──── */}
+        {(esMedico || esCoordinador || esInvestigador) && (
+          <>
+            <span className={styles.navSection}>{!collapsed && 'RECLUTAMIENTO'}</span>
+
+            {/* Médico: un solo link, sin `end` para que esté activo en toda la sección */}
+            {esMedico && (
+              <NavLink
+                to="/reclutamiento"
+                className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}
+                title={collapsed ? 'Pendientes de Evaluación' : undefined}
+              >
+                <span className={styles.navIcon}><HeartPulseIcon /></span>
+                {!collapsed && <span className={styles.navLabel}>Pendientes de Evaluación</span>}
+              </NavLink>
+            )}
+
+            {/* Coordinador: un solo link */}
+            {esCoordinador && (
+              <NavLink
+                to="/reclutamiento"
+                className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}
+                title={collapsed ? 'Mis Candidatos' : undefined}
+              >
+                <span className={styles.navIcon}><UsersIcon /></span>
+                {!collapsed && <span className={styles.navLabel}>Mis Candidatos</span>}
+              </NavLink>
+            )}
+
+            {/* Investigador: dos links — usar `end` en Pendientes */}
+            {esInvestigador && (
+              <>
+                <NavLink
+                  to="/reclutamiento"
+                  end
+                  className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}
+                  title={collapsed ? 'Pendientes' : undefined}
+                >
+                  <span className={styles.navIcon}><ClockIcon /></span>
+                  {!collapsed && <span className={styles.navLabel}>Pendientes</span>}
+                </NavLink>
+                <NavLink
+                  to="/reclutamiento/historial"
+                  className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}
+                  title={collapsed ? 'Historial' : undefined}
+                >
+                  <span className={styles.navIcon}><HistoryIcon /></span>
+                  {!collapsed && <span className={styles.navLabel}>Historial</span>}
+                </NavLink>
+              </>
+            )}
+          </>
+        )}
+
+        {/* ── PACIENTES (Médico, Coordinador, Investigador) ──────── */}
+        {(esMedico || esCoordinador || esInvestigador) && (
+          <>
+            <span className={styles.navSection}>{!collapsed && 'PACIENTES'}</span>
+            <NavLink
+              to="/pacientes"
+              className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}
+              title={collapsed ? 'Pacientes' : undefined}
+            >
+              <span className={styles.navIcon}><PatientsIcon /></span>
+              {!collapsed && (
+                <span className={styles.navLabel}>
+                  {esMedico ? 'Mis Pacientes' : esInvestigador ? 'Pacientes' : 'Lista de Pacientes'}
+                </span>
+              )}
+            </NavLink>
+          </>
+        )}
+
+        {/* ── REPORTES (Médico, Coordinador, Comité) ─────────────── */}
+        {(esMedico || esCoordinador || esComite) && (
+          <>
+            <span className={styles.navSection}>{!collapsed && 'REPORTES'}</span>
+            <NavLink
+              to="/reportes"
+              className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}
+              title={collapsed ? 'Dashboard' : undefined}
+            >
+              <span className={styles.navIcon}><ChartIcon /></span>
+              {!collapsed && <span className={styles.navLabel}>Dashboard</span>}
+            </NavLink>
+          </>
+        )}
+
+      </nav>
+
+      {!collapsed && (
+        <div className={styles.sidebarFooter}>
+          <span>SGEC v1.0</span>
+          <span>{rol}</span>
+        </div>
+      )}
+    </aside>
+  );
+}
+
+/* ── Iconos SVG ─────────────────────────────────────────────────── */
+function UserCircleIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
+}
+function FlaskIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3H6l-3 9h18L18 3h-3"/><path d="M3 12l9 9 9-9"/></svg>;
+}
+function ListIcon() {
+  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>;
+}
+function PillIcon() {
+  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.5 20.5 3.5 13.5a5 5 0 1 1 7-7l7 7a5 5 0 1 1-7 7Z"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>;
+}
+function HeartPulseIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>;
+}
+function UsersIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
+}
+function ClockIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+}
+function HistoryIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5"/></svg>;
+}
+function PatientsIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
+}
+function ChartIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>;
+}
+function ChevronIcon({ collapsed }) {
+  return collapsed
+    ? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    : <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>;
+}
+function ChevronGroupIcon({ expanded }) {
+  return expanded
+    ? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    : <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>;
+}

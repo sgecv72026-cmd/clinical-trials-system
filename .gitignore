@@ -1,0 +1,9 @@
+target/
+node_modules/
+build/
+.env
+.env.local
+*.class
+*.jar
+.idea/
+.vscode/

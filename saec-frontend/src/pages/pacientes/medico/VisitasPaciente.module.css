@@ -1,0 +1,161 @@
+.page { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  align-self: flex-start;
+}
+.backBtn:hover { text-decoration: underline; }
+
+.header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; }
+
+.title { font-size: 1.5rem; font-weight: 700; color: var(--color-gray-900); margin: 0; }
+
+.subtitle { font-size: 0.875rem; color: var(--color-gray-500); margin: 0.25rem 0 0; }
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 4rem 1rem;
+  color: var(--color-gray-500);
+}
+
+.errorBox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  background: var(--color-error-light);
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-md);
+  color: var(--color-error);
+  font-size: 0.875rem;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 4rem 1rem;
+  color: var(--color-gray-400);
+}
+
+.visitasList { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.visitaCard {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition);
+}
+.visitaCard:hover { box-shadow: var(--shadow-md); }
+
+.visitaLeft { flex-shrink: 0; }
+
+.visitaNum {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  min-width: 52px;
+}
+
+.semanaLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.diaLabel {
+  font-size: 0.7rem;
+  color: var(--color-gray-400);
+  white-space: nowrap;
+}
+
+.visitaInfo { flex: 1; min-width: 0; }
+
+.visitaNombre {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  margin-bottom: 0.2rem;
+}
+
+.visitaMeta {
+  font-size: 0.8125rem;
+  color: var(--color-gray-500);
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.visitaRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.badgeEstado {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.btnDetalle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.875rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition);
+  white-space: nowrap;
+}
+.btnDetalle:hover { background: var(--color-primary-dark); }
+
+.btnDetalleOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.875rem;
+  background: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.btnDetalleOutline:hover { background: var(--color-primary-light); }
+
+.paginationWrap { padding-top: 0.5rem; }
