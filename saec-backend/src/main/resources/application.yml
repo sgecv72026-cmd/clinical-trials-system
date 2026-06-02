@@ -5,9 +5,9 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/SGEC2
-    username: postgres
-    password: SGEC2026.V7
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-0-us-east-2.pooler.supabase.com:5432/postgres?sslmode=require}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:SGEC2026.V7}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
@@ -20,7 +20,6 @@ spring:
     show-sql: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     open-in-view: false
 
