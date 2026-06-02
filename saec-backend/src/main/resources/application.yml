@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/SGEC2
     username: postgres
-    password: 120624
+    password: SGEC2026.V7
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
